@@ -2,6 +2,12 @@ import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { firebaseConfig } from './firebase.config';
 
+import {
+  FirebaseServiceCommands as Commands,
+  FirebaseCreateDto,
+  FirebaseInterfaces,
+} from 'types/mail/firebase';
+
 @Injectable()
 export class FirebaseService {
   private readonly app: admin.app.App;
@@ -28,5 +34,10 @@ export class FirebaseService {
     } catch (err) {
       throw new Error('Invalid Firebase token');
     }
+  }
+
+  async create(data: FirebaseCreateDto): Promise<FirebaseInterfaces.Response>  {
+    const response = await this.getAuth().createUser(data);
+    return response;
   }
 }
