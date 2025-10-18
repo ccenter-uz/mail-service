@@ -9,6 +9,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { AllExceptionFilter } from './common/filter/all-exception.filter';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
+import { FirebaseModule } from './modules/firebase/firebase.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
       load: [appConfig, dbConfig, rabbitConfig],
     }),
     PrismaModule,
+    FirebaseModule,
   ],
   controllers: [],
   providers: [
